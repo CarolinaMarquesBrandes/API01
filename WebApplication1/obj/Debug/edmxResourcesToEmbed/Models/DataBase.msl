@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TesteAppModelStoreContainer" CdmEntityContainer="TesteAppEntities">
+    <EntitySetMapping Name="Categoria">
+      <EntityTypeMapping TypeName="TesteAppModel.Categoria">
+        <MappingFragment StoreEntitySet="Categoria">
+          <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+          <ScalarProperty Name="sNome" ColumnName="sNome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produto">
+      <EntityTypeMapping TypeName="TesteAppModel.Produto">
+        <MappingFragment StoreEntitySet="Produto">
+          <ScalarProperty Name="idProduto" ColumnName="idProduto" />
+          <ScalarProperty Name="sNome" ColumnName="sNome" />
+          <ScalarProperty Name="sDescricao" ColumnName="sDescricao" />
+          <ScalarProperty Name="nPreco" ColumnName="nPreco" />
+          <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+          <ScalarProperty Name="idUsuarioCadastro" ColumnName="idUsuarioCadastro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Telefone">
+      <EntityTypeMapping TypeName="TesteAppModel.Telefone">
+        <MappingFragment StoreEntitySet="Telefone">
+          <ScalarProperty Name="idTelefone" ColumnName="idTelefone" />
+          <ScalarProperty Name="sTelefone" ColumnName="sTelefone" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="TesteAppModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="sNome" ColumnName="sNome" />
+          <ScalarProperty Name="sCPF" ColumnName="sCPF" />
+          <ScalarProperty Name="dCadastro" ColumnName="dCadastro" />
+          <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

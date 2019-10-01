@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TesteAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="idCategoria" />
+    </Key>
+    <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sNome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Produto" Relationship="Self.FK_Produto_Categoria" FromRole="Categoria" ToRole="Produto" />
+  </EntityType>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="idProduto" />
+    </Key>
+    <Property Name="idProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sNome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sDescricao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nPreco" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="idCategoria" Type="Int32" />
+    <Property Name="idUsuarioCadastro" Type="Int32" />
+    <NavigationProperty Name="Categoria" Relationship="Self.FK_Produto_Categoria" FromRole="Produto" ToRole="Categoria" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Produto_Usuario" FromRole="Produto" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Telefone">
+    <Key>
+      <PropertyRef Name="idTelefone" />
+    </Key>
+    <Property Name="idTelefone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sTelefone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="idUsuario" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Telefone_Usuario" FromRole="Telefone" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sNome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="sCPF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dCadastro" Type="DateTime" Precision="3" />
+    <Property Name="sEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Produto" Relationship="Self.FK_Produto_Usuario" FromRole="Usuario" ToRole="Produto" />
+    <NavigationProperty Name="Telefone" Relationship="Self.FK_Telefone_Usuario" FromRole="Usuario" ToRole="Telefone" />
+  </EntityType>
+  <Association Name="FK_Produto_Categoria">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="idCategoria" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="idCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produto_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="idUsuarioCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Telefone_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Telefone" Type="Self.Telefone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Telefone">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TesteAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+    <EntitySet Name="Produto" EntityType="Self.Produto" />
+    <EntitySet Name="Telefone" EntityType="Self.Telefone" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Produto_Categoria" Association="Self.FK_Produto_Categoria">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produto_Usuario" Association="Self.FK_Produto_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Telefone_Usuario" Association="Self.FK_Telefone_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Telefone" EntitySet="Telefone" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
