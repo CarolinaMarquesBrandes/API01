@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers
 [HttpPost]
         public void Post([FromBody]Usuario usuario)
         {
-            if(usuario.sNome.Split(' ').Length <= 1)
+            if (usuario.sNome.Split(' ').Length <= 1)
             {
                 return;
             }

@@ -15,6 +15,9 @@ namespace WebApplication1
         {
             // Web API configuration and services
 
+            var cors = new System.Web.Http.Cors.EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+           
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -26,9 +29,6 @@ namespace WebApplication1
 
             
 
-            var cors = new System.Web.Http.Cors.EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
-           
 
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
